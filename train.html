@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Quantimat</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="icon.ico" rel="shortcut icon">
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <div class="navigation-bar">
+        <table id="navigation-bar-grid" style="width: 250px; height: 650px; min-height: 650px; border-spacing: 0;">
+            <tr>
+                <td height="10%"></td>
+            </tr>
+            <tr>
+                <td height="15%">
+                    <a href="home.html">
+                        <div class="nav-button hoverable" onclick="window.location.reload()">
+                            <div class="icon-container"><img src="icons/home.png"></img></div>
+                            <div class="label-container"><span>Home</span></div>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td height="5%"></td>
+            </tr>
+            <tr>
+                <td height="25%">
+                    <div class="nav-button hoverable">
+                        <div class="icon-container"><img src="icons/contract.png"></img></div>
+                        <div class="label-container"><span>To Do</span></div>
+                    </div>
+                    <div class="nav-button current">
+                        <div class="icon-container"><img src="icons/dumbbell-ffcb3b.png"></img></div>
+                        <div class="label-container"><span>Train</span></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="10%"></td>
+            </tr>
+            <tr>
+                <td height="25%">
+                    <a href="https://facebook.com">
+                        <div class="nav-button hoverable">
+                            <div class="icon-container"><img src="icons/info.png"></img></div>
+                            <div class="label-container"><span>About Us</span></div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="nav-button hoverable">
+                            <div class="icon-container"><img src="icons/settings.png"></img></div>
+                            <div class="label-container"><span>Settings</span></div>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td height="10%"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="main" style="position: relative;">
+        <div class="header" style="z-index: 9; position: relative; padding: 4px 48px; box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.4);">
+            <img src="icons/logo-yellow.png" height="48px" style="vertical-align: top; margin-top: 8px;">
+            <span class="user" style="vertical-align: top; float: right; margin-top: 8px;">
+                <img src="icons/avatar.png" height="40px">
+            </span>
+        </div>
+        <div style="z-index: 1; position: relative; padding: 24px 48px; width: 60%; border-right: 1px solid rgb(230, 230, 230);">
+            <h1>Train Yourself</h1>
+            <div id="tests-container" style="text-align: center;">
+
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="play-container" style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 11;" onclick="playContainer.style.display = 'none'";></div>
+    
+    <script type="text/javascript">
+        class testType {
+            constructor(id, title, keywords, color, image, description, long) {
+                this.id = id;
+                this.title = title;
+                this.keywords = keywords;
+                this.color = color;
+                this.image = image;
+                this.description = description;
+                this.long = long
+            }
+            outElement() {
+                let imageDiv = document.createElement("div");
+                let imageElement = document.createElement("img");
+                imageElement.src = this.image;
+                imageElement.style.width = "320px";
+                imageElement.style.marginTop = "-10%";
+                imageDiv.style.borderTopLeftRadius = "12px";
+                imageDiv.style.borderTopRightRadius = "12px";            
+                imageDiv.style.height = "82px";
+                imageDiv.style.overflow = "hidden";
+                imageDiv.appendChild(imageElement)
+
+                let textDiv = document.createElement("div");
+                let titleElement = document.createElement("h4");
+                let descElement = document.createElement("p");
+                titleElement.innerHTML = this.title;
+                titleElement.style.margin = "4px 0px";
+                titleElement.style.color = this.color;
+                descElement.innerHTML = this.description;
+                descElement.style.textIndent = "0.5in";
+                descElement.style.fontSize = "12px";
+                textDiv.style.height = "82px";
+                textDiv.style.padding = "4px 8px";
+                textDiv.appendChild(titleElement);
+                textDiv.appendChild(descElement);
+
+                let tagsDiv = document.createElement("div");
+                let tagsElement = document.createElement("p");
+                tagsElement.innerHTML = this.keywords.join(", ");
+                tagsElement.style.fontSize = "10px";
+                tagsElement.style.color = "white";
+                tagsElement.style.margin = "0px";
+                tagsDiv.style.height = "16px";
+                tagsDiv.style.padding = "2px 8px";
+                tagsDiv.style.backgroundColor = this.color;
+                tagsDiv.style.borderBottomLeftRadius = "12px";
+                tagsDiv.style.borderBottomRightRadius = "12px";
+                tagsDiv.appendChild(tagsElement);
+
+                let mainDiv = document.createElement("div");
+                mainDiv.className = "hoverable-3";
+                mainDiv.style.cursor = "pointer";
+                mainDiv.style.userSelect = "none";
+                mainDiv.style.display = "inline-block";
+                mainDiv.style.position = "relative";
+                mainDiv.style.width = "320px";
+                mainDiv.style.height = "192px";
+                mainDiv.style.margin = "24px";
+                mainDiv.style.textAlign = "left";
+                mainDiv.style.borderRadius = "12px";
+                mainDiv.style.boxShadow = "4px 4px 12px rgba(0, 0, 0, 0.2)";
+                
+                mainDiv.appendChild(imageDiv);
+                mainDiv.appendChild(textDiv);
+                mainDiv.appendChild(tagsDiv);
+
+                return mainDiv;
+            }
+            outPopup() {
+
+            }
+        }
+
+        let testsContainer = document.getElementById("tests-container");
+
+        var tests = [
+            new testType("aaa", "Polynomial Equations", ["polynomial", "gen-math", "equations"], "#d91466", "images/test-img-1.png", "Quisque pellentesque, ex at auctor semper, justo velit feugiat urna, sit amet dapibus magna risus at ligula."),
+            new testType("aab", "Rational Equations", ["rational", "gen-math", "equations"], "#b211ed", "images/test-img-2.jpg", "Nulla accumsan lectus magna, eget sagittis turpis fermentum sit amet. In maximus vitae elit nec pulvinar."),
+            new testType("aac", "Radical Equations", ["radical", "gen-math", "equations"], "#d92114", "images/test-img-3.png", "Vestibulum sed malesuada risus. Etiam pellentesque risus id arcu auctor tempor vitae nec nunc."),
+            new testType("aad", "Exponential Equations", ["exponential", "gen-math", "equations"], "#d95c14", "images/test-img-4.jpg", "Nullam condimentum elit ex, nec auctor turpis ultricies vel. Donec eleifend purus nibh, a consequat velit facilisis in."),
+            new testType("aae", "Logarithmic Equations", ["logarithmic", "gen-math", "equations"], "#d9c914", "images/test-img-5.jpg", "Curabitur congue dui et pulvinar iaculis. Aliquam gravida efficitur nisl a egestas. In vulputate vitae odio non ornare.")
+        ]
+
+        for (let i = 0; i < tests.length; i++) {
+            testsContainer.appendChild(tests[i].outElement());
+        }
+
+        var playContainer = document.getElementById("play-container");
+    </script>
+</body>
+
+</html>
